@@ -1,0 +1,19 @@
+# Virtual environment
+.venv/
+
+# PyCharm
+.idea/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Model outputs
+saved_models/
+catboost_info/
+
+# Dataset
+data/
+
+# OS junk
+.DS_Store
