@@ -1,5 +1,6 @@
 import pandas as pd
 import joblib
+import numpy as np
 
 # ============================
 # Load saved model assets
@@ -11,7 +12,7 @@ feature_columns = joblib.load('saved_models/feature_columns.pkl')
 print("\nEnter details for CO2 prediction:\n")
 
 # ============================
-# Take input from user
+# Take user input
 # ============================
 country = input("Country: ")
 year = int(input("Year: "))
@@ -46,24 +47,29 @@ input_dict = {
 input_df = pd.DataFrame([input_dict])
 
 # ============================
-# One-hot encoding
+# One-hot encode
 # ============================
 input_df = pd.get_dummies(input_df)
 
 # ============================
-# Align columns
+# Align columns with training
 # ============================
 input_df = input_df.reindex(columns=feature_columns, fill_value=0)
 
 # ============================
-# Scale
+# Decide whether scaling is required
 # ============================
-input_scaled = scaler.transform(input_df)
+model_name = type(best_model).__name__
+
+if model_name in ["LinearRegression", "MLPRegressor"]:
+    input_final = scaler.transform(input_df)
+else:
+    input_final = input_df.values
 
 # ============================
 # Predict
 # ============================
-prediction = best_model.predict(input_scaled)
+prediction = best_model.predict(input_final)
 
 print("\n========== RESULT ==========")
 print(f"Predicted CO2 Emission: {prediction[0]:.2f}")
