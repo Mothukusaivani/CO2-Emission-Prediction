@@ -9,7 +9,6 @@ __pycache__/
 *.pyc
 
 # Model outputs
-saved_models/
 catboost_info/
 
 # Dataset
