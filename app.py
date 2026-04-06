@@ -81,11 +81,11 @@ col1, col2, col3 = st.columns(3)
 
 r2 = selected_metrics["r2"].values[0] if "r2" in selected_metrics else np.nan
 rmse = selected_metrics["rmse"].values[0] if "rmse" in selected_metrics else np.nan
-mae = selected_metrics["mae"].values[0] if "mae" in selected_metrics else np.nan
+# mae = selected_metrics["mae"].values[0] if "mae" in selected_metrics else np.nan
 
 col1.metric("R² Score", round(r2, 4))
 col2.metric("RMSE", round(rmse, 2))
-col3.metric("MAE", round(mae, 2))
+# col3.metric("MAE", round(mae, 2))
 
 fig_compare = px.bar(
     metrics_df,
@@ -140,7 +140,6 @@ if "actual" in test_df.columns and "predicted" in test_df.columns:
         nbins=50,
         title="Prediction Error Distribution"
     )
-
     st.plotly_chart(fig_error, use_container_width=True)
 
 # -------------------------------------------------
